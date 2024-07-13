@@ -129,6 +129,19 @@ yoloLib/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/yoloLib.dir/build.make CMakeFiles/yoloLib.dir/build
 .PHONY : yoloLib/fast
 
+#=============================================================================
+# Target rules for targets named preprocessingLib
+
+# Build rule for target.
+preprocessingLib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preprocessingLib
+.PHONY : preprocessingLib
+
+# fast build rule for target.
+preprocessingLib/fast:
+	$(MAKE) $(MAKESILENT) -f preprocessingLib/CMakeFiles/preprocessingLib.dir/build.make preprocessingLib/CMakeFiles/preprocessingLib.dir/build
+.PHONY : preprocessingLib/fast
+
 src/yolov8.o: src/yolov8.cpp.o
 .PHONY : src/yolov8.o
 
@@ -161,6 +174,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... preprocessingLib"
 	@echo "... yoloLib"
 	@echo "... src/yolov8.o"
 	@echo "... src/yolov8.i"

@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
     
 
     // Load the YOLOv8 model
-    $model = $ffi->load_model("/home/hardy/projects/yoloPHP/model/yolov8n.torchscript");
+    $model = $ffi->load_model("/home/hardy/projects/yoloPHP/phpServer/model/yolov8n.torchscript");
 
     if ($model === null) {
         echo "Failed to load model.";

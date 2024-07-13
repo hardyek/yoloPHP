@@ -499,12 +499,6 @@ MKLDNN_DIR:PATH=MKLDNN_DIR-NOTFOUND
 //The directory containing a CMake configuration file for MKL.
 MKL_DIR:PATH=MKL_DIR-NOTFOUND
 
-//The directory containing a CMake configuration file for OpenCV.
-OpenCV_DIR:PATH=/usr/local/lib/cmake/opencv4
-
-//Path to a library.
-PREPROCESSING_LIB:FILEPATH=/usr/local/lib/libpreprocessingLib.so
-
 //Path to a library.
 TORCH_LIBRARY:FILEPATH=/home/hardy/projects/yoloPHP/yoloLib/libtorch/lib/libtorch.so
 
@@ -515,13 +509,25 @@ c10_LIBRARY:FILEPATH=/home/hardy/projects/yoloPHP/yoloLib/libtorch/lib/libc10.so
 kineto_LIBRARY:FILEPATH=/home/hardy/projects/yoloPHP/yoloLib/libtorch/lib/libkineto.a
 
 //Value Computed by CMake
+preprocessingLib_BINARY_DIR:STATIC=/home/hardy/projects/yoloPHP/yoloLib/build/preprocessingLib
+
+//Value Computed by CMake
+preprocessingLib_IS_TOP_LEVEL:STATIC=OFF
+
+//Dependencies for the target
+preprocessingLib_LIB_DEPENDS:STATIC=general;opencv_calib3d;general;opencv_core;general;opencv_dnn;general;opencv_features2d;general;opencv_flann;general;opencv_gapi;general;opencv_highgui;general;opencv_imgcodecs;general;opencv_imgproc;general;opencv_ml;general;opencv_objdetect;general;opencv_photo;general;opencv_stitching;general;opencv_video;general;opencv_videoio;general;opencv_aruco;general;opencv_bgsegm;general;opencv_bioinspired;general;opencv_ccalib;general;opencv_datasets;general;opencv_dnn_objdetect;general;opencv_dnn_superres;general;opencv_dpm;general;opencv_face;general;opencv_freetype;general;opencv_fuzzy;general;opencv_hfs;general;opencv_img_hash;general;opencv_intensity_transform;general;opencv_line_descriptor;general;opencv_mcc;general;opencv_optflow;general;opencv_phase_unwrapping;general;opencv_plot;general;opencv_quality;general;opencv_rapid;general;opencv_reg;general;opencv_rgbd;general;opencv_saliency;general;opencv_shape;general;opencv_signal;general;opencv_stereo;general;opencv_structured_light;general;opencv_superres;general;opencv_surface_matching;general;opencv_text;general;opencv_tracking;general;opencv_videostab;general;opencv_wechat_qrcode;general;opencv_xfeatures2d;general;opencv_ximgproc;general;opencv_xobjdetect;general;opencv_xphoto;general;opencv_calib3d;general;opencv_core;general;opencv_dnn;general;opencv_features2d;general;opencv_flann;general;opencv_gapi;general;opencv_highgui;general;opencv_imgcodecs;general;opencv_imgproc;general;opencv_ml;general;opencv_objdetect;general;opencv_photo;general;opencv_stitching;general;opencv_video;general;opencv_videoio;general;opencv_aruco;general;opencv_bgsegm;general;opencv_bioinspired;general;opencv_ccalib;general;opencv_datasets;general;opencv_dnn_objdetect;general;opencv_dnn_superres;general;opencv_dpm;general;opencv_face;general;opencv_freetype;general;opencv_fuzzy;general;opencv_hfs;general;opencv_img_hash;general;opencv_intensity_transform;general;opencv_line_descriptor;general;opencv_mcc;general;opencv_optflow;general;opencv_phase_unwrapping;general;opencv_plot;general;opencv_quality;general;opencv_rapid;general;opencv_reg;general;opencv_rgbd;general;opencv_saliency;general;opencv_shape;general;opencv_signal;general;opencv_stereo;general;opencv_structured_light;general;opencv_superres;general;opencv_surface_matching;general;opencv_text;general;opencv_tracking;general;opencv_videostab;general;opencv_wechat_qrcode;general;opencv_xfeatures2d;general;opencv_ximgproc;general;opencv_xobjdetect;general;opencv_xphoto;
+
+//Value Computed by CMake
+preprocessingLib_SOURCE_DIR:STATIC=/home/hardy/projects/yoloPHP/preprocessingLib
+
+//Value Computed by CMake
 yoloLib_BINARY_DIR:STATIC=/home/hardy/projects/yoloPHP/yoloLib/build
 
 //Value Computed by CMake
 yoloLib_IS_TOP_LEVEL:STATIC=ON
 
 //Dependencies for the target
-yoloLib_LIB_DEPENDS:STATIC=general;torch;torch_library;/home/hardy/projects/yoloPHP/yoloLib/libtorch/lib/libc10.so;/home/hardy/projects/yoloPHP/yoloLib/libtorch/lib/libkineto.a;/usr/lib/wsl/lib/libcuda.so;/usr/local/cuda/lib64/libnvrtc.so;/usr/local/cuda/lib64/libnvToolsExt.so;/usr/local/cuda/lib64/libcudart.so;/home/hardy/projects/yoloPHP/yoloLib/libtorch/lib/libc10_cuda.so;general;/usr/local/lib/libpreprocessingLib.so;
+yoloLib_LIB_DEPENDS:STATIC=general;torch;torch_library;/home/hardy/projects/yoloPHP/yoloLib/libtorch/lib/libc10.so;/home/hardy/projects/yoloPHP/yoloLib/libtorch/lib/libkineto.a;/usr/lib/wsl/lib/libcuda.so;/usr/local/cuda/lib64/libnvrtc.so;/usr/local/cuda/lib64/libnvToolsExt.so;/usr/local/cuda/lib64/libcudart.so;/home/hardy/projects/yoloPHP/yoloLib/libtorch/lib/libc10_cuda.so;general;preprocessingLib;general;opencv_calib3d;general;opencv_core;general;opencv_dnn;general;opencv_features2d;general;opencv_flann;general;opencv_gapi;general;opencv_highgui;general;opencv_imgcodecs;general;opencv_imgproc;general;opencv_ml;general;opencv_objdetect;general;opencv_photo;general;opencv_stitching;general;opencv_video;general;opencv_videoio;general;opencv_aruco;general;opencv_bgsegm;general;opencv_bioinspired;general;opencv_ccalib;general;opencv_datasets;general;opencv_dnn_objdetect;general;opencv_dnn_superres;general;opencv_dpm;general;opencv_face;general;opencv_freetype;general;opencv_fuzzy;general;opencv_hfs;general;opencv_img_hash;general;opencv_intensity_transform;general;opencv_line_descriptor;general;opencv_mcc;general;opencv_optflow;general;opencv_phase_unwrapping;general;opencv_plot;general;opencv_quality;general;opencv_rapid;general;opencv_reg;general;opencv_rgbd;general;opencv_saliency;general;opencv_shape;general;opencv_signal;general;opencv_stereo;general;opencv_structured_light;general;opencv_superres;general;opencv_surface_matching;general;opencv_text;general;opencv_tracking;general;opencv_videostab;general;opencv_wechat_qrcode;general;opencv_xfeatures2d;general;opencv_ximgproc;general;opencv_xobjdetect;general;opencv_xphoto;
 
 //Value Computed by CMake
 yoloLib_SOURCE_DIR:STATIC=/home/hardy/projects/yoloPHP/yoloLib
@@ -645,7 +651,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

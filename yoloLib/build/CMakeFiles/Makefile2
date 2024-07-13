@@ -64,29 +64,46 @@ CMAKE_BINARY_DIR = /home/hardy/projects/yoloPHP/yoloLib/build
 
 # The main recursive "all" target.
 all: CMakeFiles/yoloLib.dir/all
+all: preprocessingLib/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: preprocessingLib/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: CMakeFiles/yoloLib.dir/clean
+clean: preprocessingLib/clean
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory preprocessingLib
+
+# Recursive "all" directory target.
+preprocessingLib/all: preprocessingLib/CMakeFiles/preprocessingLib.dir/all
+.PHONY : preprocessingLib/all
+
+# Recursive "preinstall" directory target.
+preprocessingLib/preinstall:
+.PHONY : preprocessingLib/preinstall
+
+# Recursive "clean" directory target.
+preprocessingLib/clean: preprocessingLib/CMakeFiles/preprocessingLib.dir/clean
+.PHONY : preprocessingLib/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/yoloLib.dir
 
 # All Build rule for target.
-CMakeFiles/yoloLib.dir/all:
+CMakeFiles/yoloLib.dir/all: preprocessingLib/CMakeFiles/preprocessingLib.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/yoloLib.dir/build.make CMakeFiles/yoloLib.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/yoloLib.dir/build.make CMakeFiles/yoloLib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hardy/projects/yoloPHP/yoloLib/build/CMakeFiles --progress-num=1,2 "Built target yoloLib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hardy/projects/yoloPHP/yoloLib/build/CMakeFiles --progress-num=3,4 "Built target yoloLib"
 .PHONY : CMakeFiles/yoloLib.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/yoloLib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hardy/projects/yoloPHP/yoloLib/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hardy/projects/yoloPHP/yoloLib/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/yoloLib.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/hardy/projects/yoloPHP/yoloLib/build/CMakeFiles 0
 .PHONY : CMakeFiles/yoloLib.dir/rule
@@ -99,6 +116,32 @@ yoloLib: CMakeFiles/yoloLib.dir/rule
 CMakeFiles/yoloLib.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/yoloLib.dir/build.make CMakeFiles/yoloLib.dir/clean
 .PHONY : CMakeFiles/yoloLib.dir/clean
+
+#=============================================================================
+# Target rules for target preprocessingLib/CMakeFiles/preprocessingLib.dir
+
+# All Build rule for target.
+preprocessingLib/CMakeFiles/preprocessingLib.dir/all:
+	$(MAKE) $(MAKESILENT) -f preprocessingLib/CMakeFiles/preprocessingLib.dir/build.make preprocessingLib/CMakeFiles/preprocessingLib.dir/depend
+	$(MAKE) $(MAKESILENT) -f preprocessingLib/CMakeFiles/preprocessingLib.dir/build.make preprocessingLib/CMakeFiles/preprocessingLib.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/hardy/projects/yoloPHP/yoloLib/build/CMakeFiles --progress-num=1,2 "Built target preprocessingLib"
+.PHONY : preprocessingLib/CMakeFiles/preprocessingLib.dir/all
+
+# Build rule for subdir invocation for target.
+preprocessingLib/CMakeFiles/preprocessingLib.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hardy/projects/yoloPHP/yoloLib/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preprocessingLib/CMakeFiles/preprocessingLib.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hardy/projects/yoloPHP/yoloLib/build/CMakeFiles 0
+.PHONY : preprocessingLib/CMakeFiles/preprocessingLib.dir/rule
+
+# Convenience name for target.
+preprocessingLib: preprocessingLib/CMakeFiles/preprocessingLib.dir/rule
+.PHONY : preprocessingLib
+
+# clean rule for target.
+preprocessingLib/CMakeFiles/preprocessingLib.dir/clean:
+	$(MAKE) $(MAKESILENT) -f preprocessingLib/CMakeFiles/preprocessingLib.dir/build.make preprocessingLib/CMakeFiles/preprocessingLib.dir/clean
+.PHONY : preprocessingLib/CMakeFiles/preprocessingLib.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
