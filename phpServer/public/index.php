@@ -11,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
         YOLOv8* load_model(const char* model_path);
         void process_frame(YOLOv8* model, const char* framePath, const char* outputPath);
         void release_model(YOLOv8* model);
-    ", "/home/hardy/projects/yoloPHP/src/build/libyolov8.so");
+    ", "/home/hardy/projects/yoloPHP/yoloLib/build/libyoloLib.so");
+    
 
     // Load the YOLOv8 model
     $model = $ffi->load_model("/home/hardy/projects/yoloPHP/model/yolov8n.torchscript");

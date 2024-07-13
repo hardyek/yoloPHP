@@ -1,6 +1,6 @@
+#include "yolov8.h"
 #include <torch/script.h>
-#include <opencv2/opencv.hpp>
-#include <opencv2/imgcodecs.hpp>
+#include <preprocessingLib.h>
 #include <iostream>
 
 extern "C" {
@@ -21,7 +21,7 @@ extern "C" {
     }
 
     void process_frame(YOLOv8* model, const char* frame_path, const char* output_path) {
-        cv::Mat frame = cv::imread(frame_path);
+        cv::Mat frame = preprocessingLib::imread(frame_path);
         if (frame.empty()) {
             std::cerr << "Failed to read the image\n";
             return;
@@ -38,7 +38,7 @@ extern "C" {
 
         at::Tensor output = model->module.forward(inputs).toTensor();
 
-        for (int i = 0 ; i < output.size(1); ++i) {
+        for (int i = 0; i < output.size(1); ++i) {
             float* data = output[0][i].data_ptr<float>();
             cv::Rect box(data[0], data[1], data[2], data[3]);
             cv::rectangle(frame, box, cv::Scalar(0, 255, 0), 2);

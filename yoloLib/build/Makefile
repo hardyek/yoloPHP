@@ -31,9 +31,6 @@ default_target: all
 
 .SUFFIXES: .hpux_make_needs_suffix_list
 
-# Produce verbose output by default.
-VERBOSE = 1
-
 # Command-line flag to silence nested $(MAKE).
 $(VERBOSE)MAKESILENT = -s
 
@@ -60,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hardy/projects/yoloPHP/src
+CMAKE_SOURCE_DIR = /home/hardy/projects/yoloPHP/yoloLib
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hardy/projects/yoloPHP/src/build
+CMAKE_BINARY_DIR = /home/hardy/projects/yoloPHP/yoloLib/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -90,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hardy/projects/yoloPHP/src/build/CMakeFiles /home/hardy/projects/yoloPHP/src/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hardy/projects/yoloPHP/yoloLib/build/CMakeFiles /home/hardy/projects/yoloPHP/yoloLib/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hardy/projects/yoloPHP/src/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hardy/projects/yoloPHP/yoloLib/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -120,41 +117,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named yolov8
+# Target rules for targets named yoloLib
 
 # Build rule for target.
-yolov8: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 yolov8
-.PHONY : yolov8
+yoloLib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 yoloLib
+.PHONY : yoloLib
 
 # fast build rule for target.
-yolov8/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/yolov8.dir/build.make CMakeFiles/yolov8.dir/build
-.PHONY : yolov8/fast
+yoloLib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/yoloLib.dir/build.make CMakeFiles/yoloLib.dir/build
+.PHONY : yoloLib/fast
 
-yolov8.o: yolov8.cpp.o
-.PHONY : yolov8.o
+src/yolov8.o: src/yolov8.cpp.o
+.PHONY : src/yolov8.o
 
 # target to build an object file
-yolov8.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/yolov8.dir/build.make CMakeFiles/yolov8.dir/yolov8.cpp.o
-.PHONY : yolov8.cpp.o
+src/yolov8.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/yoloLib.dir/build.make CMakeFiles/yoloLib.dir/src/yolov8.cpp.o
+.PHONY : src/yolov8.cpp.o
 
-yolov8.i: yolov8.cpp.i
-.PHONY : yolov8.i
+src/yolov8.i: src/yolov8.cpp.i
+.PHONY : src/yolov8.i
 
 # target to preprocess a source file
-yolov8.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/yolov8.dir/build.make CMakeFiles/yolov8.dir/yolov8.cpp.i
-.PHONY : yolov8.cpp.i
+src/yolov8.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/yoloLib.dir/build.make CMakeFiles/yoloLib.dir/src/yolov8.cpp.i
+.PHONY : src/yolov8.cpp.i
 
-yolov8.s: yolov8.cpp.s
-.PHONY : yolov8.s
+src/yolov8.s: src/yolov8.cpp.s
+.PHONY : src/yolov8.s
 
 # target to generate assembly for a file
-yolov8.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/yolov8.dir/build.make CMakeFiles/yolov8.dir/yolov8.cpp.s
-.PHONY : yolov8.cpp.s
+src/yolov8.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/yoloLib.dir/build.make CMakeFiles/yoloLib.dir/src/yolov8.cpp.s
+.PHONY : src/yolov8.cpp.s
 
 # Help Target
 help:
@@ -164,10 +161,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... yolov8"
-	@echo "... yolov8.o"
-	@echo "... yolov8.i"
-	@echo "... yolov8.s"
+	@echo "... yoloLib"
+	@echo "... src/yolov8.o"
+	@echo "... src/yolov8.i"
+	@echo "... src/yolov8.s"
 .PHONY : help
 
 

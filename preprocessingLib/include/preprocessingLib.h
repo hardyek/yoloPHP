@@ -2,13 +2,10 @@
 #define PREPROCESSING_LIB_H
 
 #include <opencv2/opencv.hpp>
+#include <string>
 
-namespace preprocessing {
-
+namespace preprocessingLib {
     cv::Mat imread(const std::string& filename, int flags = cv::IMREAD_COLOR);
+}
 
-    cv::Mat resize(const cv::Mat& img, const cv::Size& size);
-
-} 
-
-#endif 
+#endif // PREPROCESSING_LIB_H

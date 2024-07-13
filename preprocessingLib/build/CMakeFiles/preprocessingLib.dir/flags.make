@@ -6,5 +6,5 @@ CXX_DEFINES = -DpreprocessingLib_EXPORTS
 
 CXX_INCLUDES = -I/home/hardy/projects/yoloPHP/preprocessingLib/include -isystem /usr/local/include/opencv4
 
-CXX_FLAGS = -fPIC
+CXX_FLAGS = -fPIC -std=gnu++17
 

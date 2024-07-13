@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/hardy/projects/yoloPHP/src/yolov8.cpp" "CMakeFiles/yolov8.dir/yolov8.cpp.o" "gcc" "CMakeFiles/yolov8.dir/yolov8.cpp.o.d"
+  "/home/hardy/projects/yoloPHP/yoloLib/src/yolov8.cpp" "CMakeFiles/yoloLib.dir/src/yolov8.cpp.o" "gcc" "CMakeFiles/yoloLib.dir/src/yolov8.cpp.o.d"
   )
 
 # Targets to which this target links.

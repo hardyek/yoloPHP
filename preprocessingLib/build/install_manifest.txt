@@ -1,0 +1,2 @@
+/usr/local/lib/libpreprocessingLib.so
+/usr/local/include/preprocessingLib.h
