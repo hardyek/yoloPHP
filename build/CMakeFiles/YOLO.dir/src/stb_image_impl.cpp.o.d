@@ -1,7 +1,8 @@
 CMakeFiles/YOLO.dir/src/stb_image_impl.cpp.o: \
  /home/hardy/projects/yoloPHP/src/stb_image_impl.cpp \
  /usr/include/stdc-predef.h \
- /home/hardy/projects/yoloPHP/include/stb_image.h /usr/include/stdio.h \
+ /home/hardy/projects/yoloPHP/include/stb/stb_image.h \
+ /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -111,4 +112,5 @@ CMakeFiles/YOLO.dir/src/stb_image_impl.cpp.o: \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/mmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/mm_malloc.h \
- /home/hardy/projects/yoloPHP/include/stb_image_write.h
+ /home/hardy/projects/yoloPHP/include/stb/stb_image_resize.h \
+ /home/hardy/projects/yoloPHP/include/stb/stb_image_write.h

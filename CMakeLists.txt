@@ -17,6 +17,9 @@ find_package(Torch REQUIRED)
 # Include directories
 include_directories(${Torch_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
 
+# Add the path to stb headers
+include_directories(${CMAKE_SOURCE_DIR}/include/stb)
+
 # Add library
 add_library(YOLO SHARED src/yolov8.cpp src/stb_image_impl.cpp include/yolov8.h)
 

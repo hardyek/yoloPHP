@@ -1,7 +1,8 @@
 CMakeFiles/YOLO.dir/src/yolov8.cpp.o: \
  /home/hardy/projects/yoloPHP/src/yolov8.cpp /usr/include/stdc-predef.h \
  /home/hardy/projects/yoloPHP/include/yolov8.h \
- /home/hardy/projects/yoloPHP/include/stb_image.h /usr/include/stdio.h \
+ /home/hardy/projects/yoloPHP/include/stb/stb_image.h \
+ /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -58,7 +59,11 @@ CMakeFiles/YOLO.dir/src/yolov8.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h /usr/include/alloca.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/c++/11/bits/std_abs.h \
- /home/hardy/projects/yoloPHP/include/stb_image_write.h \
+ /home/hardy/projects/yoloPHP/include/stb/stb_image_resize.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /home/hardy/projects/yoloPHP/include/stb/stb_image_write.h \
  /home/hardy/projects/yoloPHP/libtorch/include/torch/script.h \
  /home/hardy/projects/yoloPHP/libtorch/include/torch/csrc/api/include/torch/types.h \
  /home/hardy/projects/yoloPHP/libtorch/include/ATen/ATen.h \
@@ -86,9 +91,6 @@ CMakeFiles/YOLO.dir/src/yolov8.cpp.o: \
  /usr/include/c++/11/bits/uses_allocator.h \
  /usr/include/c++/11/bits/invoke.h /usr/include/c++/11/chrono \
  /usr/include/c++/11/ratio /usr/include/c++/11/cstdint \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/c++/11/limits /usr/include/c++/11/ctime /usr/include/time.h \
  /usr/include/x86_64-linux-gnu/bits/time.h \
  /usr/include/x86_64-linux-gnu/bits/timex.h \
