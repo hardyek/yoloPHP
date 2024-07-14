@@ -62,29 +62,51 @@ extern "C" {
 
         std::cout << "Model inference done." << std::endl;
 
-        for (int i = 0; i < output.size(1); ++i) {
-            float* data = output[0][i].data_ptr<float>();
-            int left = static_cast<int>(data[0] * new_width);
-            int top = static_cast<int>(data[1] * new_height);
-            int right = static_cast<int>((data[0] + data[2]) * new_width);
-            int bottom = static_cast<int>((data[1] + data[3]) * new_height);
+        try {
+            int num_outputs = output.size(1);
+            int num_elements = output[0][0].numel();
 
-            for (int y = top; y < bottom; ++y) {
-                for (int x = left; x < right; ++x) {
-                    resized_data[y * new_width * 3 + x * 3] = 0;
-                    resized_data[y * new_width * 3 + x * 3 + 1] = 255;
-                    resized_data[y * new_width * 3 + x * 3 + 2] = 0;
+            std::cout << "Number of outputs: " << num_outputs << std::endl;
+            std::cout << "Number of elements in each output: " << num_elements << std::endl;
+
+            for (int i = 0; i < num_outputs; ++i) {
+                float* data = output[0][i].data_ptr<float>();
+                int left = static_cast<int>(data[0] * new_width);
+                int top = static_cast<int>(data[1] * new_height);
+                int right = static_cast<int>((data[0] + data[2]) * new_width);
+                int bottom = static_cast<int>((data[1] + data[3]) * new_height);
+
+                std::cout << "Output " << i << ": [" << left << ", " << top << ", " << right << ", " << bottom << "]" << std::endl;
+
+                // Ensure the coordinates are within the image bounds
+                left = std::max(0, std::min(left, new_width - 1));
+                top = std::max(0, std::min(top, new_height - 1));
+                right = std::max(0, std::min(right, new_width - 1));
+                bottom = std::max(0, std::min(bottom, new_height - 1));
+
+                std::cout << "Corrected Output " << i << ": [" << left << ", " << top << ", " << right << ", " << bottom << "]" << std::endl;
+
+                for (int y = top; y < bottom; ++y) {
+                    for (int x = left; x < right; ++x) {
+                        resized_data[y * new_width * 3 + x * 3] = 0;
+                        resized_data[y * new_width * 3 + x * 3 + 1] = 255;
+                        resized_data[y * new_width * 3 + x * 3 + 2] = 0;
+                    }
                 }
             }
-        }
 
-        std::cout << "Drawing rectangles done." << std::endl;
+            std::cout << "Drawing rectangles done." << std::endl;
+        } catch (const std::exception& e) {
+            std::cerr << "Error during post-processing: " << e.what() << std::endl;
+            delete[] resized_data;
+            return;
+        }
 
         stbi_write_jpg(output_path, new_width, new_height, 3, resized_data, 100);
         delete[] resized_data;
 
         std::cout << "Image saved to " << output_path << std::endl;
-    } 
+    }
 
     void release_model(YOLOv8* model) {
         delete model;
