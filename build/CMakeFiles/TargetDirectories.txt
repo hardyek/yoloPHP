@@ -1,0 +1,3 @@
+/home/hardy/projects/yoloPHP/build/CMakeFiles/YOLO.dir
+/home/hardy/projects/yoloPHP/build/CMakeFiles/edit_cache.dir
+/home/hardy/projects/yoloPHP/build/CMakeFiles/rebuild_cache.dir
