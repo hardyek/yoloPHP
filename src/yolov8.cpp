@@ -81,17 +81,13 @@ extern "C" {
         return keep;
     }
 
-    void draw_rectangles(unsigned char* image_data, int width, int height, const std::vector<std::array<float, 4>>& boxes) {
-        for (const auto& box : boxes) {
+    void draw_rectangles(unsigned char* image_data, int width, int height, const std::vector<std::tuple<std::array<float, 4>, float, int>>& nms_boxes) {
+        for (const auto& box_info : nms_boxes) {
+            auto box = std::get<0>(box_info);
             int left = static_cast<int>(box[0] * width);
             int top = static_cast<int>(box[1] * height);
             int right = static_cast<int>(box[2] * width);
-            int bottom = static_cast<int>((box[3] * height));
-
-            left = std::max(0, std::min(left, width - 1));
-            top = std::max(0, std::min(top, height - 1));
-            right = std::max(0, std::min(right, width - 1));
-            bottom = std::max(0, std::min(bottom, height - 1));
+            int bottom = static_cast<int>(box[3] * height);
 
             for (int y = top; y < bottom; ++y) {
                 for (int x = left; x < right; ++x) {
@@ -147,11 +143,12 @@ extern "C" {
             std::vector<float> scores;
             std::vector<int> class_ids;
 
-            int num_outputs = output.size(1);
+            at::Tensor transposed_output = output[0].transpose(1, 0).contiguous();
+            int rows = transposed_output.size(0);
 
-            for (int i = 0; i < num_outputs; ++i) {
-                auto data = output[0][i].data_ptr<float>();
-                std::vector<float> class_scores(data + 5, data + output.size(2));
+            for (int i = 0; i < rows; ++i) {
+                auto data = transposed_output[i].data_ptr<float>();
+                std::vector<float> class_scores(data + 4, data + transposed_output.size(1));
                 auto [maxScore, maxClassIndex] = find_max_score(class_scores);
                 if (maxScore >= 0.25) {
                     std::array<float, 4> box = {data[0] - (0.5 * data[2]), data[1] - (0.5 * data[3]), data[0] + (0.5 * data[2]), data[1] + (0.5 * data[3])};
@@ -162,9 +159,10 @@ extern "C" {
             }
 
             auto keep = apply_nms(boxes, scores, class_ids, 0.25, 0.45);
-            std::vector<std::array<float, 4>> nms_boxes;
-            for (int idx : keep) {
-                nms_boxes.push_back(boxes[idx]);
+
+            std::vector<std::tuple<std::array<float, 4>, float, int>> nms_boxes;
+            for (auto idx : keep) {
+                nms_boxes.emplace_back(boxes[idx], scores[idx], class_ids[idx]);
             }
 
             draw_rectangles(resized_data, new_width, new_height, nms_boxes);
