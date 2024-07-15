@@ -92,7 +92,7 @@ extern "C" {
         return keep;
     }
 
-    std::vector<unsigned char> draw_rectangles(unsigned char* image_data, int width, int height, const std::vector<std::tuple<std::array<float, 4>, float, int>>& nms_boxes) {
+    std::vector<unsigned char> draw_rectangles(std::vector<unsigned char>& image_data, int width, int height, const std::vector<std::tuple<std::array<float, 4>, float, int>>& nms_boxes) {
         // Calculate scale factors
         float scale_x = static_cast<float>(width) / 640.0;
         float scale_y = static_cast<float>(height) / 640.0;
@@ -123,7 +123,15 @@ extern "C" {
             int bottom = static_cast<int>((box[1] + box[3]) * scale_y);
 
             std::cout << "Valid box: [" << left << ", " << top << ", " << right << ", " << bottom << "]" << std::endl;
-             for (int y = top; y < top + outline_width && y < height; ++y) {
+
+            // Ensure coordinates are valid
+            if (left < 0 || top < 0 || right >= width || bottom >= height) {
+                std::cerr << "Box coordinates are out of bounds, skipping drawing this box." << std::endl;
+                continue;
+            }
+
+            // Draw top and bottom borders
+            for (int y = top; y < top + outline_width && y < height; ++y) {
                 for (int x = left; x < right && x < width; ++x) {
                     int index = y * width * 3 + x * 3;
                     image_data[index] = 0;         // Red channel
@@ -158,6 +166,7 @@ extern "C" {
                 }
             }
         }
+
         return image_data;
     }
 
@@ -173,13 +182,17 @@ extern "C" {
 
         int new_width = 640;
         int new_height = 640;
-        unsigned char* resized_data = new unsigned char[new_width * new_height * 3];
+        std::vector<unsigned char> resized_data(new_width * new_height * 3);
 
-        stbir_resize_uint8(original_data, width, height, 0, resized_data, new_width, new_height, 0, 3);
+        if (!stbir_resize_uint8(original_data, width, height, 0, resized_data.data(), new_width, new_height, 0, 3)) {
+            std::cerr << "Failed to resize the image\n";
+            stbi_image_free(original_data);
+            return;
+        }
 
         std::cout << "Image resized." << std::endl;
 
-        auto input_tensor = torch::from_blob(resized_data, {1, new_height, new_width, 3}, torch::kUInt8);
+        auto input_tensor = torch::from_blob(resized_data.data(), {1, new_height, new_width, 3}, torch::kUInt8);
         input_tensor = input_tensor.permute({0, 3, 1, 2}).to(torch::kFloat);
         input_tensor = input_tensor.div(255);
 
@@ -193,7 +206,7 @@ extern "C" {
             output = model->module.forward(inputs).toTensor();
         } catch (const c10::Error& e) {
             std::cerr << "Error during model inference: " << e.what() << std::endl;
-            delete[] resized_data;
+            stbi_image_free(original_data);
             return;
         }
 
@@ -225,16 +238,22 @@ extern "C" {
             nms_boxes.emplace_back(boxes[idx], scores[idx], class_ids[idx]);
         }
 
-        std::vector<unsigned char> image_with_boxes = draw_rectangles(original_data, width, height, nms_boxes);
-        std::cout << "Drawing rectangles done." << std::endl;
-        std::cout << "S1" << std::endl;
-        stbi_write_jpg(output_path, width, height, 3, image_with_boxes, 100);
-        std::cout << "S2" << std::endl;
-        delete[] original_data;
-        delete[] resized_data;
-        std::cout << "S3" << std::endl;
-        stbi_image_free(image_with_boxes);
-        std::cout << "S4" << std::endl;
+        std::vector<unsigned char> image_data(original_data, original_data + (width * height * 3));
+        stbi_image_free(original_data);
+
+        try {
+            image_data = draw_rectangles(image_data, width, height, nms_boxes);
+            std::cout << "Drawing rectangles done." << std::endl;
+        } catch (const std::exception& e) {
+            std::cerr << "Error during drawing rectangles: " << e.what() << std::endl;
+            return;
+        }
+
+        if (!stbi_write_jpg(output_path, width, height, 3, image_data.data(), 100)) {
+            std::cerr << "Failed to save the image\n";
+        } else {
+            std::cout << "Image saved to " << output_path << std::endl;
+        }
     }
 
 
