@@ -104,6 +104,4 @@ curl -X POST -F "image=@/path/to/your/image.jpg" http://localhost:8000/index.php
 </code>
 </h1>
 <hr>
-<h3> 
 Currently whilst the classes are determined for each box (as well as confidence score) they are not put onto the output. This is mostly done as for each use case there will be different processing done onto the detections themselves. Modify yolov8.cpp file to generate the output you would like wether it be the raw detections or an image, this is why the <code>draw_rectangles</code> function is seperate in yolov8.cpp and can easily be removed/replaced with another post-processing function.
-</h3>
