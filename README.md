@@ -2,7 +2,7 @@
 
 <h3>YOLOv8 functionality on a PHP server using the PHP FFI and LibTorch</h3>
 
-<h2>Directory Structure<h2>
+<h2>Directory Structure</h2>
 
 ```
 ├── CMakeLists.txt              # Build options and configuration
