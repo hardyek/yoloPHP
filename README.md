@@ -1,6 +1,6 @@
 <h1>YOLOPHP</h1>
 
-<h3>YOLOv8 functionality on a PHP server using the PHP FFI and LibTorch</h3>
+<h5>YOLOv8 functionality on a PHP server using the PHP FFI and LibTorch</h5>
 
 <h2>Directory Structure</h2>
 
@@ -66,8 +66,21 @@ sudo apt install cmake
 git clone https://github.com/hardyek/YOLOPHP.git <br>
 cd YOLOPHP
 </code>
+<h2>Download and unzip libtorch library</h2>
+<code>
+wget https://download.pytorch.org/libtorch/cu121/libtorch-win-shared-with-deps-2.3.1%2Bcu121.zip <br>
+unzip libtorch-win-shared-with-deps-2.3.1%2Bcu121.zip <br>
+</code>
+Rename directory to libtorch <br>
+<code>
+mv libtorch-win-shared-with-deps-2.3.1+cu121 libtorch <br>
+</code>
+Delete zip file <br>
+<code>
+rm libtorch-win-shared-with-deps-2.3.1+cu121.zip <br>
+</code>
 <h2>Check file paths are correct</h2>
-Search codebase for comment FILEPATH and ensure they are all correct.
+Search codebase for comment FILEPATH and ensure they are all correct. Might be useful to compare the directory structure to the one shown above as well.
 </h1>
 <hr>
 

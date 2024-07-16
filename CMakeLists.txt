@@ -5,10 +5,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(CMAKE_CUDA_COMPILER /usr/local/cuda-12.1/bin/nvcc)
+set(CMAKE_CUDA_COMPILER /usr/local/cuda-12.1/bin/nvcc) #FILEPATH (should have been installed here but may not have been.)
 
 # Set Torch_DIR to find LibTorch
-set(Torch_DIR /home/hardy/projects/yoloPHP/libtorch/share/cmake/Torch)
+set(Torch_DIR /home/hardy/projects/yoloPHP/libtorch/share/cmake/Torch) #FILEPATH
 list(APPEND CMAKE_PREFIX_PATH "${Torch_DIR}")
 
 # Find packages

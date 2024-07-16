@@ -25,6 +25,7 @@ extern "C" {
         return model;
     }
 
+    // Finds the maximum score class (the class_id that will be used going forward).
     std::tuple<float, int> find_max_score(const std::vector<float>& scores) {
         float maxScore = scores[0];
         int maxIndex = 0;
@@ -37,6 +38,7 @@ extern "C" {
         return std::make_tuple(maxScore, maxIndex);
     }
 
+    // IoU used for NMS
     float iou(const std::array<float, 4>& box1, const std::array<float, 4>& box2) {
          // Convert (x, y, w, h) to (x1, y1, x2, y2)
         float x1_1 = box1[0];
@@ -49,6 +51,7 @@ extern "C" {
         float x2_2 = box2[0] + box2[2];
         float y2_2 = box2[1] + box2[3];
 
+        // Coordinates of the intersectional box
         float inter_x1 = std::max(x1_1, x1_2);
         float inter_y1 = std::max(y1_1, y1_2);
         float inter_x2 = std::min(x2_1, x2_2);
@@ -61,6 +64,7 @@ extern "C" {
     return inter_area / (box1_area + box2_area - inter_area);
 }
 
+    // NMS function to filter model outputs.
     std::vector<int> apply_nms(
         const std::vector<std::array<float, 4>>& boxes,
         const std::vector<float>& scores,
@@ -98,12 +102,14 @@ extern "C" {
         float scale_y = static_cast<float>(height) / 640.0;
         int outline_width = 5;
 
+
         for (size_t i = 0; i < nms_boxes.size(); ++i) {
             const auto& box_info = nms_boxes[i];
             const auto& box = std::get<0>(box_info);
             float score = std::get<1>(box_info);
             int class_id = std::get<2>(box_info);
             
+            // For debug can be removed.
             std::cout << "Box " << i << ": ["
                     << "x=" << box[0] << ", "
                     << "y=" << box[1] << ", "
@@ -192,6 +198,8 @@ extern "C" {
 
         std::cout << "Image resized." << std::endl;
 
+        // Load LibTorch tensor from resized image data
+
         auto input_tensor = torch::from_blob(resized_data.data(), {1, new_height, new_width, 3}, torch::kUInt8);
         input_tensor = input_tensor.permute({0, 3, 1, 2}).to(torch::kFloat);
         input_tensor = input_tensor.div(255);
@@ -212,12 +220,18 @@ extern "C" {
 
         std::cout << "Model inference done." << std::endl;
 
+        // Initialise vectors for boxes, scores and class_ids
+
         std::vector<std::array<float, 4>> boxes;
         std::vector<float> scores;
         std::vector<int> class_ids;
 
+        // Transpose output as per steps in outputs.ipynb
+
         at::Tensor transposed_output = output[0].transpose(1, 0).contiguous();
         int rows = transposed_output.size(0);
+
+        // Iterate over rows of output and filtering boxes with a lower score than 0.25 and storing the highest score class_id
 
         for (int i = 0; i < rows; ++i) {
             auto data = transposed_output[i].data_ptr<float>();
@@ -238,6 +252,7 @@ extern "C" {
             nms_boxes.emplace_back(boxes[idx], scores[idx], class_ids[idx]);
         }
 
+        // Recall the original data to draw boxes on
         std::vector<unsigned char> image_data(original_data, original_data + (width * height * 3));
         stbi_image_free(original_data);
 
