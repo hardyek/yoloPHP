@@ -1,7 +1,5 @@
 <h1>YOLOPHP</h1>
 
-<h5>YOLOv8 functionality on a PHP server using the PHP FFI and LibTorch</h5>
-
 <h2>Directory Structure</h2>
 
 ```
